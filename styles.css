@@ -139,6 +139,34 @@ body {
   pointer-events: none;
 }
 
+.music-toggle {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 4;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(217, 63, 97, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 9px 22px rgba(95, 54, 65, 0.13);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.music-toggle:hover {
+  background: #fff;
+}
+
+.music-toggle:focus-visible {
+  outline: 3px solid rgba(217, 63, 97, 0.32);
+  outline-offset: 3px;
+}
+
 .tap-particle {
   position: fixed;
   top: var(--origin-y);

@@ -23,6 +23,8 @@ const elements = {
   milestoneDots: document.querySelectorAll(".milestone"),
   heartRain: document.querySelector("#heart-rain"),
   tapFireworks: document.querySelector("#tap-fireworks"),
+  backgroundMusic: document.querySelector("#background-music"),
+  musicToggle: document.querySelector("#music-toggle"),
 };
 
 const units = {
@@ -31,6 +33,40 @@ const units = {
   minute: 60 * 1000,
   second: 1000,
 };
+
+let musicPausedByUser = false;
+
+function updateMusicToggle() {
+  const isPlaying = !elements.backgroundMusic.paused;
+  const label = isPlaying ? "Pause background music" : "Play background music";
+
+  elements.musicToggle.textContent = isPlaying ? "🔊" : "🔈";
+  elements.musicToggle.setAttribute("aria-label", label);
+  elements.musicToggle.title = label;
+}
+
+function startMusic() {
+  if (musicPausedByUser || !elements.backgroundMusic.paused) return;
+
+  elements.backgroundMusic.play().catch(() => {
+    updateMusicToggle();
+  });
+}
+
+function toggleMusic() {
+  if (elements.backgroundMusic.paused) {
+    musicPausedByUser = false;
+    startMusic();
+    return;
+  }
+
+  musicPausedByUser = true;
+  elements.backgroundMusic.pause();
+}
+
+elements.backgroundMusic.addEventListener("play", updateMusicToggle);
+elements.backgroundMusic.addEventListener("pause", updateMusicToggle);
+elements.musicToggle.addEventListener("click", toggleMusic);
 
 function twoDigits(value) {
   return String(value).padStart(2, "0");
@@ -147,8 +183,17 @@ function fireworkAt(x, y) {
 
 document.addEventListener("pointerdown", (event) => {
   if (event.button && event.button !== 0) return;
+  if (event.target.closest("#music-toggle")) return;
+  startMusic();
   fireworkAt(event.clientX, event.clientY);
 });
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("#music-toggle")) return;
+  startMusic();
+});
+
+updateMusicToggle();
 
 function completeCountdown() {
   if (elements.countdown.classList.contains("is-complete")) return;
