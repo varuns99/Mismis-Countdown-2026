@@ -55,19 +55,26 @@ function journeyProgress(now) {
 function startHeartRain() {
   if (elements.heartRain.childElementCount) return;
 
-  const hearts = ["♡", "♥", "♡", "♥", "♡", "♥", "♡", "♥", "♡", "♥", "♡", "♥"];
-  const colors = ["#d93f61", "#ee8faa", "#b84b68", "#f2a3b9"];
+  const heartShapes = ["♡", "♥", "❣", "❥", "♡", "♥", "♡", "❣"];
+  const positions = [2, 9, 17, 24, 32, 38, 47, 55, 61, 69, 76, 83, 91, 6, 14, 29, 43, 52, 65, 73, 87, 96, 20, 35, 58, 79];
+  const colors = ["#d93f61", "#ee8faa", "#b84b68", "#f2a3b9", "#c95a75"];
+  const sizes = ["0.86rem", "1.18rem", "1.38rem", "0.98rem", "1.5rem", "1.08rem"];
+  const drifts = [-38, 29, -24, 42, -31, 24, 35, -45];
+  const sways = [18, -26, 32, -18, 22, -34, 28, -20];
+  const tilts = [-20, 14, -12, 23, -16, 18, -24, 10];
   const fragment = document.createDocumentFragment();
 
-  hearts.forEach((heart, index) => {
+  positions.forEach((position, index) => {
     const drop = document.createElement("span");
     drop.className = "falling-heart";
-    drop.textContent = heart;
-    drop.style.setProperty("--left", `${(index * 8.7 + 3) % 96}%`);
-    drop.style.setProperty("--delay", `${-(index * 0.9)}s`);
-    drop.style.setProperty("--duration", `${8 + (index % 5)}s`);
-    drop.style.setProperty("--drift", `${index % 2 ? 34 : -30}px`);
-    drop.style.setProperty("--tilt", `${index % 2 ? 18 : -14}deg`);
+    drop.textContent = heartShapes[index % heartShapes.length];
+    drop.style.setProperty("--left", `${position}%`);
+    drop.style.setProperty("--delay", `${-((index * 1.37) % 13)}s`);
+    drop.style.setProperty("--duration", `${7.5 + ((index * 1.9) % 5.5)}s`);
+    drop.style.setProperty("--drift", `${drifts[index % drifts.length]}px`);
+    drop.style.setProperty("--sway", `${sways[index % sways.length]}px`);
+    drop.style.setProperty("--tilt", `${tilts[index % tilts.length]}deg`);
+    drop.style.setProperty("--heart-size", sizes[index % sizes.length]);
     drop.style.setProperty("--heart-color", colors[index % colors.length]);
     fragment.append(drop);
   });
