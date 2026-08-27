@@ -1,5 +1,5 @@
 const targetTime = new Date("2026-08-30T14:30:00+02:00").getTime();
-const progressStartTime = new Date("2026-08-27T10:49:45+02:00").getTime();
+const progressStartTime = new Date("2026-08-26T12:00:00+02:00").getTime();
 const milestones = [
   { time: progressStartTime, icon: "🐭🇭🇷" },
   { time: new Date("2026-08-29T08:30:00+02:00").getTime(), icon: "🐭🧳" },
