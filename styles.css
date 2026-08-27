@@ -124,6 +124,52 @@ body {
   transform: rotate(-6deg);
 }
 
+.heart-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -3rem;
+  left: var(--left);
+  color: var(--heart-color);
+  font-family: "Segoe Print", "Comic Sans MS", cursive;
+  font-size: clamp(1rem, 2.4vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: rotate(var(--tilt));
+}
+
+.heart-rain.is-active .falling-heart {
+  animation: heart-fall var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes heart-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -8vh, 0) rotate(var(--tilt));
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  90% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift), 112vh, 0) rotate(calc(var(--tilt) * -1));
+  }
+}
+
 .countdown {
   position: relative;
   z-index: 1;
@@ -200,6 +246,19 @@ h1 {
   width: clamp(94px, 16vw, 126px);
   height: auto;
   object-fit: contain;
+}
+
+.countdown.is-complete h1 {
+  color: var(--accent);
+}
+
+.countdown.is-complete .status {
+  min-height: 0;
+  margin: 28px auto 10px;
+}
+
+.countdown.is-complete .status-animation {
+  width: clamp(168px, 31vw, 250px);
 }
 
 .journey {
@@ -398,6 +457,14 @@ h1 {
     width: 102px;
   }
 
+  .countdown.is-complete .status {
+    margin: 22px auto 8px;
+  }
+
+  .countdown.is-complete .status-animation {
+    width: min(62vw, 224px);
+  }
+
   .progress-track {
     height: 104px;
   }
@@ -408,5 +475,16 @@ h1 {
 
   .milestone-icon {
     font-size: 0.9rem;
+  }
+
+  .falling-heart {
+    font-size: 1.05rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart-rain.is-active .falling-heart {
+    animation: none;
+    opacity: 0.45;
   }
 }

@@ -5,10 +5,13 @@ const milestones = [
   { time: new Date("2026-08-29T08:30:00+02:00").getTime(), icon: "🐭🧳" },
   { time: new Date("2026-08-30T08:30:00+02:00").getTime(), icon: "🐭✈" },
   { time: new Date("2026-08-30T12:30:00+02:00").getTime(), icon: "🚌🐭" },
-  { time: targetTime, icon: "🐭❤️🐭" },
+  { time: targetTime, icon: "🐭❤️🐭", pointerIcon: "❤️" },
 ];
 
 const elements = {
+  countdown: document.querySelector(".countdown"),
+  title: document.querySelector("#countdown-title"),
+  timer: document.querySelector(".timer"),
   days: document.querySelector("#days"),
   hours: document.querySelector("#hours"),
   minutes: document.querySelector("#minutes"),
@@ -18,6 +21,7 @@ const elements = {
   progressNeedle: document.querySelector("#progress-needle"),
   progressTrack: document.querySelector(".progress-track"),
   milestoneDots: document.querySelectorAll(".milestone"),
+  heartRain: document.querySelector("#heart-rain"),
 };
 
 const units = {
@@ -48,6 +52,39 @@ function journeyProgress(now) {
   return 100;
 }
 
+function startHeartRain() {
+  if (elements.heartRain.childElementCount) return;
+
+  const hearts = ["♡", "♥", "♡", "♥", "♡", "♥", "♡", "♥", "♡", "♥", "♡", "♥"];
+  const colors = ["#d93f61", "#ee8faa", "#b84b68", "#f2a3b9"];
+  const fragment = document.createDocumentFragment();
+
+  hearts.forEach((heart, index) => {
+    const drop = document.createElement("span");
+    drop.className = "falling-heart";
+    drop.textContent = heart;
+    drop.style.setProperty("--left", `${(index * 8.7 + 3) % 96}%`);
+    drop.style.setProperty("--delay", `${-(index * 0.9)}s`);
+    drop.style.setProperty("--duration", `${8 + (index % 5)}s`);
+    drop.style.setProperty("--drift", `${index % 2 ? 34 : -30}px`);
+    drop.style.setProperty("--tilt", `${index % 2 ? 18 : -14}deg`);
+    drop.style.setProperty("--heart-color", colors[index % colors.length]);
+    fragment.append(drop);
+  });
+
+  elements.heartRain.append(fragment);
+  elements.heartRain.classList.add("is-active");
+}
+
+function completeCountdown() {
+  if (elements.countdown.classList.contains("is-complete")) return;
+
+  elements.countdown.classList.add("is-complete");
+  elements.title.textContent = "Miš meets Miš now ❤️";
+  elements.timer.replaceWith(elements.status);
+  startHeartRain();
+}
+
 function updateCountdown() {
   const now = Date.now();
   const remaining = targetTime - now;
@@ -60,17 +97,13 @@ function updateCountdown() {
   elements.progressTrack.style.setProperty("--progress", `${progress}%`);
   elements.progressFill.style.setProperty("--progress", `${progress}%`);
   elements.progressNeedle.style.setProperty("--progress", `${progress}%`);
-  elements.progressNeedle.textContent = currentMilestone.icon;
+  elements.progressNeedle.textContent = currentMilestone.pointerIcon || currentMilestone.icon;
   elements.milestoneDots.forEach((dot, index) => {
     dot.classList.toggle("is-passed", now >= milestones[index].time);
   });
 
   if (remaining <= 0) {
-    elements.days.textContent = "0";
-    elements.hours.textContent = "00";
-    elements.minutes.textContent = "00";
-    elements.seconds.textContent = "00";
-    elements.status.textContent = "Miš meets Miš now ❤️";
+    completeCountdown();
     return;
   }
 
