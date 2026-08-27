@@ -495,6 +495,7 @@ h1 {
   width: 100%;
   height: 44px;
   line-height: 1;
+  transform: translateY(-14px);
 }
 
 .milestone-art,
@@ -506,17 +507,17 @@ h1 {
 }
 
 .milestone-icon-arrival {
-  width: 88px;
-  gap: 1px;
+  width: 82px;
+  gap: 0;
 }
 
 .milestone-art-arrival {
-  width: 34px;
-  height: 30px;
+  width: 32px;
+  height: 28px;
 }
 
 .milestone-heart {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1;
 }
 
@@ -643,21 +644,21 @@ h1 {
   }
 
   .milestone-icon-arrival {
-    width: 64px;
+    width: 58px;
     gap: 0;
   }
 
   .milestone-end {
-    width: 64px;
+    width: 58px;
   }
 
   .milestone-art-arrival {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
 
   .milestone-heart {
-    font-size: 0.68rem;
+    font-size: 0.6rem;
   }
 
   .falling-heart { font-size: min(var(--heart-size), 1.15rem); }
