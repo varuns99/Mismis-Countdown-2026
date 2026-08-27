@@ -442,6 +442,11 @@ h1 {
   transition: left 400ms ease;
 }
 
+.progress-needle[data-milestone="run"] {
+  width: 78px;
+  height: 60px;
+}
+
 .milestone {
   position: absolute;
   top: 8px;
@@ -526,6 +531,16 @@ h1 {
   height: 48px;
 }
 
+.milestone-art-run:not(.milestone-art-arrival) {
+  width: 70px;
+  height: 57px;
+}
+
+.milestone-art-arrival.milestone-art-run {
+  width: 77px;
+  height: 65px;
+}
+
 .milestone-art-arrival + .milestone-art-arrival {
   margin-left: -20px;
 }
@@ -533,6 +548,10 @@ h1 {
 .milestone-art-wait {
   width: 66px;
   height: 55px;
+}
+
+.milestone-icon-arrival:has(.milestone-art-run) {
+  width: 123px;
 }
 
 @media (max-width: 620px) {
@@ -665,7 +684,7 @@ h1 {
   .milestone-icon-arrival {
     width: 70px;
     gap: 0;
-    transform: translate(8px, -14px);
+    transform: translate(-4px, -14px);
   }
 
   .milestone-end {
@@ -677,6 +696,21 @@ h1 {
     height: 39px;
   }
 
+  .progress-needle[data-milestone="run"] {
+    width: 68px;
+    height: 54px;
+  }
+
+  .milestone-art-run:not(.milestone-art-arrival) {
+    width: 61px;
+    height: 51px;
+  }
+
+  .milestone-art-arrival.milestone-art-run {
+    width: 53px;
+    height: 53px;
+  }
+
   .milestone-art-arrival + .milestone-art-arrival {
     margin-left: -14px;
   }
@@ -684,6 +718,10 @@ h1 {
   .milestone-art-wait {
     width: 45px;
     height: 45px;
+  }
+
+  .milestone-icon-arrival:has(.milestone-art-run) {
+    width: 84px;
   }
 
   .falling-heart { font-size: min(var(--heart-size), 1.15rem); }
