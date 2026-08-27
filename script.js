@@ -22,6 +22,7 @@ const elements = {
   progressTrack: document.querySelector(".progress-track"),
   milestoneDots: document.querySelectorAll(".milestone"),
   heartRain: document.querySelector("#heart-rain"),
+  tapFireworks: document.querySelector("#tap-fireworks"),
 };
 
 const units = {
@@ -82,6 +83,39 @@ function startHeartRain() {
   elements.heartRain.append(fragment);
   elements.heartRain.classList.add("is-active");
 }
+
+function fireworkAt(x, y) {
+  const heartShapes = ["♡", "♥", "❣", "❥"];
+  const colors = ["#d93f61", "#ee8faa", "#b84b68", "#f2a3b9", "#f4b740", "#78b8a0"];
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < 26; index += 1) {
+    const angle = (Math.PI * 2 * index) / 26 + (Math.random() - 0.5) * 0.22;
+    const distance = 42 + Math.random() * 86;
+    const particle = document.createElement("span");
+    const isHeart = index % 5 === 0;
+
+    particle.className = isHeart ? "tap-particle tap-heart" : "tap-particle tap-confetti";
+    if (isHeart) particle.textContent = heartShapes[index % heartShapes.length];
+    particle.style.setProperty("--origin-x", `${x}px`);
+    particle.style.setProperty("--origin-y", `${y}px`);
+    particle.style.setProperty("--burst-x", `${Math.cos(angle) * distance}px`);
+    particle.style.setProperty("--burst-y", `${Math.sin(angle) * distance - 22}px`);
+    particle.style.setProperty("--spin", `${Math.round((Math.random() - 0.5) * 540)}deg`);
+    particle.style.setProperty("--color", colors[index % colors.length]);
+    particle.style.setProperty("--delay", `${Math.random() * 70}ms`);
+    particle.style.setProperty("--size", `${7 + Math.random() * 7}px`);
+    particle.addEventListener("animationend", () => particle.remove(), { once: true });
+    fragment.append(particle);
+  }
+
+  elements.tapFireworks.append(fragment);
+}
+
+document.addEventListener("pointerdown", (event) => {
+  if (event.button && event.button !== 0) return;
+  fireworkAt(event.clientX, event.clientY);
+});
 
 function completeCountdown() {
   if (elements.countdown.classList.contains("is-complete")) return;
