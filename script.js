@@ -83,7 +83,6 @@ function updateCountdown() {
   elements.hours.textContent = twoDigits(hours);
   elements.minutes.textContent = twoDigits(minutes);
   elements.seconds.textContent = twoDigits(seconds);
-  elements.status.textContent = "❤️";
 }
 
 updateCountdown();

@@ -100,6 +100,30 @@ body {
   transform: rotate(-4deg);
 }
 
+.wallpaper img:nth-child(9) {
+  top: 30%;
+  right: 18%;
+  transform: rotate(10deg);
+}
+
+.wallpaper img:nth-child(10) {
+  top: 67%;
+  left: 31%;
+  transform: rotate(-7deg);
+}
+
+.wallpaper img:nth-child(11) {
+  top: 85%;
+  left: 4%;
+  transform: rotate(5deg);
+}
+
+.wallpaper img:nth-child(12) {
+  top: 48%;
+  right: 3%;
+  transform: rotate(-6deg);
+}
+
 .countdown {
   position: relative;
   z-index: 1;
@@ -165,10 +189,17 @@ h1 {
 }
 
 .status {
-  min-height: 1.5em;
-  margin: 30px 0 0;
+  display: flex;
+  justify-content: center;
+  min-height: 112px;
+  margin: 22px 0 0;
   color: var(--accent);
-  font-size: 1.6rem;
+}
+
+.status-animation {
+  width: clamp(94px, 16vw, 126px);
+  height: auto;
+  object-fit: contain;
 }
 
 .journey {
@@ -315,8 +346,28 @@ h1 {
     bottom: 4%;
   }
 
-  .wallpaper img:nth-child(7),
+  .wallpaper img:nth-child(7) {
+    top: 34%;
+    left: 12%;
+  }
+
   .wallpaper img:nth-child(8) {
+    top: 72%;
+    right: 12%;
+  }
+
+  .wallpaper img:nth-child(9) {
+    top: 22%;
+    right: 9%;
+  }
+
+  .wallpaper img:nth-child(10) {
+    top: 61%;
+    left: 8%;
+  }
+
+  .wallpaper img:nth-child(11),
+  .wallpaper img:nth-child(12) {
     display: none;
   }
 
@@ -336,6 +387,15 @@ h1 {
   .time-label {
     margin-top: 7px;
     font-size: 0.62rem;
+  }
+
+  .status {
+    min-height: 98px;
+    margin-top: 18px;
+  }
+
+  .status-animation {
+    width: 102px;
   }
 
   .progress-track {
