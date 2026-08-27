@@ -1,7 +1,7 @@
 const targetTime = new Date("2026-08-30T14:30:00+02:00").getTime();
 const progressStartTime = new Date("2026-08-26T12:00:00+02:00").getTime();
 const milestones = [
-  { id: "run", time: progressStartTime, pointerAsset: "assets/mis-run-white.gif" },
+  { id: "run", time: progressStartTime, pointerAsset: "assets/mis-run-white.gif?v=2026082733" },
   { id: "pack", time: new Date("2026-08-29T08:30:00+02:00").getTime(), pointerAsset: "assets/packmis.gif" },
   { id: "plane", time: new Date("2026-08-30T08:30:00+02:00").getTime(), pointerAsset: "assets/planemis.gif" },
   { id: "bus", time: new Date("2026-08-30T12:30:00+02:00").getTime(), pointerAsset: "assets/busmis.gif" },
