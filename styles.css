@@ -512,7 +512,7 @@ h1 {
 }
 
 .milestone-icon-arrival {
-  width: 94px;
+  width: 103px;
   gap: 0;
   transform: translate(10px, -14px);
 }
@@ -524,6 +524,11 @@ h1 {
 
 .milestone-art-arrival + .milestone-art-arrival {
   margin-left: -20px;
+}
+
+.milestone-art-wait {
+  width: 66px;
+  height: 55px;
 }
 
 @media (max-width: 620px) {
@@ -654,7 +659,7 @@ h1 {
   }
 
   .milestone-icon-arrival {
-    width: 64px;
+    width: 70px;
     gap: 0;
     transform: translate(8px, -14px);
   }
@@ -670,6 +675,11 @@ h1 {
 
   .milestone-art-arrival + .milestone-art-arrival {
     margin-left: -14px;
+  }
+
+  .milestone-art-wait {
+    width: 45px;
+    height: 45px;
   }
 
   .falling-heart { font-size: min(var(--heart-size), 1.15rem); }
