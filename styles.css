@@ -210,7 +210,7 @@ h1 {
 
 .progress-track {
   position: relative;
-  height: 68px;
+  height: 104px;
 }
 
 .progress-track::before,
@@ -237,7 +237,7 @@ h1 {
 
 .progress-needle {
   position: absolute;
-  top: 8px;
+  top: 50px;
   left: clamp(28px, var(--progress, 0%), calc(100% - 28px));
   z-index: 2;
   display: grid;
@@ -399,7 +399,7 @@ h1 {
   }
 
   .progress-track {
-    height: 70px;
+    height: 104px;
   }
 
   .milestone {
