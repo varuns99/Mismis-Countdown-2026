@@ -31,13 +31,27 @@ function twoDigits(value) {
   return String(value).padStart(2, "0");
 }
 
+function journeyProgress(now) {
+  if (now <= progressStartTime) return 0;
+  if (now >= targetTime) return 100;
+
+  for (let index = 0; index < milestones.length - 1; index += 1) {
+    const current = milestones[index];
+    const next = milestones[index + 1];
+
+    if (now < next.time) {
+      const segmentProgress = (now - current.time) / (next.time - current.time);
+      return (index + segmentProgress) * 25;
+    }
+  }
+
+  return 100;
+}
+
 function updateCountdown() {
   const now = Date.now();
   const remaining = targetTime - now;
-  const progress = Math.min(
-    100,
-    Math.max(0, ((now - progressStartTime) / (targetTime - progressStartTime)) * 100),
-  );
+  const progress = journeyProgress(now);
   const currentMilestone = milestones.reduce(
     (current, milestone) => (now >= milestone.time ? milestone : current),
     milestones[0],
@@ -48,15 +62,6 @@ function updateCountdown() {
   elements.progressNeedle.style.setProperty("--progress", `${progress}%`);
   elements.progressNeedle.textContent = currentMilestone.icon;
   elements.milestoneDots.forEach((dot, index) => {
-    const milestoneProgress = Math.min(
-      100,
-      Math.max(
-        0,
-        ((milestones[index].time - progressStartTime) / (targetTime - progressStartTime)) * 100,
-      ),
-    );
-
-    dot.style.setProperty("--position", `${milestoneProgress}%`);
     dot.classList.toggle("is-passed", now >= milestones[index].time);
   });
 
