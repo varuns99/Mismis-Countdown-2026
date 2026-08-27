@@ -89,21 +89,46 @@ function fireworkAt(x, y) {
   const colors = ["#d93f61", "#ee8faa", "#b84b68", "#f2a3b9", "#f4b740", "#78b8a0"];
   const fragment = document.createDocumentFragment();
   const isComplete = elements.countdown.classList.contains("is-complete");
-  const particleCount = isComplete ? 26 : 20;
+
+  if (!isComplete) {
+    const bubbleCount = 4 + Math.floor(Math.random() * 3);
+
+    for (let index = 0; index < bubbleCount; index += 1) {
+      const angle = (Math.PI * 2 * index) / bubbleCount + (Math.random() - 0.5) * 0.8;
+      const distance = 12 + Math.random() * 34;
+      const bubble = document.createElement("span");
+
+      bubble.className = "tap-particle tap-emoji tap-pleading-bubble";
+      bubble.textContent = "🥺";
+      bubble.style.setProperty("--origin-x", `${x}px`);
+      bubble.style.setProperty("--origin-y", `${y}px`);
+      bubble.style.setProperty("--bubble-x", `${Math.cos(angle) * distance}px`);
+      bubble.style.setProperty("--bubble-y", `${Math.sin(angle) * distance - 26}px`);
+      bubble.style.setProperty("--delay", `${Math.random() * 90}ms`);
+      bubble.style.setProperty("--size", `${11 + Math.random() * 5}px`);
+      bubble.addEventListener("animationend", () => bubble.remove(), { once: true });
+      fragment.append(bubble);
+    }
+
+    elements.tapFireworks.append(fragment);
+    return;
+  }
+
+  const particleCount = 26;
 
   for (let index = 0; index < particleCount; index += 1) {
     const angle = (Math.PI * 2 * index) / particleCount + (Math.random() - 0.5) * 0.22;
     const distance = 42 + Math.random() * 86;
     const particle = document.createElement("span");
-    const isEmoji = index % (isComplete ? 8 : 6) === 0;
-    const isHeart = !isEmoji && (!isComplete || index % 3 === 0);
+    const isEmoji = index % 8 === 0;
+    const isHeart = !isEmoji && index % 3 === 0;
 
     particle.className = isEmoji
       ? "tap-particle tap-emoji"
       : isHeart
         ? "tap-particle tap-heart"
         : "tap-particle tap-confetti";
-    if (isEmoji) particle.textContent = isComplete ? "🥹" : "🥺";
+    if (isEmoji) particle.textContent = "🥹";
     if (isHeart) particle.textContent = heartShapes[index % heartShapes.length];
     particle.style.setProperty("--origin-x", `${x}px`);
     particle.style.setProperty("--origin-y", `${y}px`);
