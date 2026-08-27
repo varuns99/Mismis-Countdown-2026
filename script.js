@@ -1,11 +1,11 @@
 const targetTime = new Date("2026-08-30T14:30:00+02:00").getTime();
 const progressStartTime = new Date("2026-08-26T12:00:00+02:00").getTime();
 const milestones = [
-  { time: progressStartTime, icon: "🐭🇭🇷" },
-  { time: new Date("2026-08-29T08:30:00+02:00").getTime(), icon: "🐭🧳" },
-  { time: new Date("2026-08-30T08:30:00+02:00").getTime(), icon: "🐭✈" },
-  { time: new Date("2026-08-30T12:30:00+02:00").getTime(), icon: "🚌🐭" },
-  { time: targetTime, icon: "🐭❤️🐭", pointerIcon: "❤️" },
+  { id: "run", time: progressStartTime, pointerAsset: "assets/mis-run-white.gif" },
+  { id: "pack", time: new Date("2026-08-29T08:30:00+02:00").getTime(), pointerAsset: "assets/packmis.gif" },
+  { id: "plane", time: new Date("2026-08-30T08:30:00+02:00").getTime(), pointerAsset: "assets/planemis.gif" },
+  { id: "bus", time: new Date("2026-08-30T12:30:00+02:00").getTime(), pointerAsset: "assets/busmis.gif" },
+  { id: "arrival", time: targetTime, pointerText: "❤️" },
 ];
 
 const elements = {
@@ -87,6 +87,24 @@ function journeyProgress(now) {
   }
 
   return 100;
+}
+
+function updateProgressNeedle(milestone) {
+  if (elements.progressNeedle.dataset.milestone === milestone.id) return;
+
+  elements.progressNeedle.replaceChildren();
+  elements.progressNeedle.dataset.milestone = milestone.id;
+
+  if (milestone.pointerText) {
+    elements.progressNeedle.textContent = milestone.pointerText;
+    return;
+  }
+
+  const animation = document.createElement("img");
+  animation.className = "pointer-animation";
+  animation.src = milestone.pointerAsset;
+  animation.alt = "";
+  elements.progressNeedle.append(animation);
 }
 
 function startHeartRain() {
@@ -216,7 +234,7 @@ function updateCountdown() {
   elements.progressTrack.style.setProperty("--progress", `${progress}%`);
   elements.progressFill.style.setProperty("--progress", `${progress}%`);
   elements.progressNeedle.style.setProperty("--progress", `${progress}%`);
-  elements.progressNeedle.textContent = currentMilestone.pointerIcon || currentMilestone.icon;
+  updateProgressNeedle(currentMilestone);
   elements.milestoneDots.forEach((dot, index) => {
     dot.classList.toggle("is-passed", now >= milestones[index].time);
   });

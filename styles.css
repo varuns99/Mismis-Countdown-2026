@@ -430,14 +430,14 @@ h1 {
   z-index: 2;
   display: grid;
   place-items: center;
-  min-width: 54px;
-  height: 42px;
-  padding: 0 8px;
+  width: 58px;
+  height: 46px;
+  padding: 0;
   border: 1px solid rgba(217, 63, 97, 0.18);
   border-radius: 999px;
   background: #fff;
   box-shadow: 0 12px 28px rgba(95, 54, 65, 0.14);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   transform: translateX(-50%);
   transition: left 400ms ease;
 }
@@ -448,7 +448,7 @@ h1 {
   left: var(--position);
   display: grid;
   justify-items: center;
-  width: 68px;
+  width: 72px;
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 650;
@@ -462,6 +462,7 @@ h1 {
 }
 
 .milestone-end {
+  width: 88px;
   justify-items: end;
   text-align: right;
   transform: translateX(-100%);
@@ -486,7 +487,36 @@ h1 {
 }
 
 .milestone-icon {
-  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  line-height: 1;
+}
+
+.milestone-art,
+.pointer-animation {
+  display: block;
+  width: 52px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.milestone-icon-arrival {
+  width: 88px;
+  gap: 1px;
+}
+
+.milestone-art-arrival {
+  width: 34px;
+  height: 30px;
+}
+
+.milestone-heart {
+  font-size: 0.9rem;
   line-height: 1;
 }
 
@@ -599,11 +629,35 @@ h1 {
   }
 
   .milestone {
-    width: 58px;
+    width: 54px;
   }
 
   .milestone-icon {
-    font-size: 0.9rem;
+    height: 40px;
+  }
+
+  .milestone-art,
+  .pointer-animation {
+    width: 45px;
+    height: 38px;
+  }
+
+  .milestone-icon-arrival {
+    width: 64px;
+    gap: 0;
+  }
+
+  .milestone-end {
+    width: 64px;
+  }
+
+  .milestone-art-arrival {
+    width: 24px;
+    height: 24px;
+  }
+
+  .milestone-heart {
+    font-size: 0.68rem;
   }
 
   .falling-heart { font-size: min(var(--heart-size), 1.15rem); }
