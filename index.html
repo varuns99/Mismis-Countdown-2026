@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A countdown to Miš meets Miš on August 30, 2026 at 14:30."
+    >
+    <title>Miš meets Miš</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;650;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="countdown" aria-labelledby="countdown-title">
+      <p class="eyebrow">August 30, 2026 · 14:30</p>
+      <h1 id="countdown-title">Miš meets Miš in:</h1>
+
+      <section class="timer" aria-label="Countdown timer">
+        <div class="time-part">
+          <span id="days" class="time-value">0</span>
+          <span class="time-label">Days</span>
+        </div>
+        <div class="time-part">
+          <span id="hours" class="time-value">00</span>
+          <span class="time-label">Hours</span>
+        </div>
+        <div class="time-part">
+          <span id="minutes" class="time-value">00</span>
+          <span class="time-label">Mins</span>
+        </div>
+        <div class="time-part">
+          <span id="seconds" class="time-value">00</span>
+          <span class="time-label">Seconds</span>
+        </div>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite">❤️</p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
