@@ -157,6 +157,11 @@ body {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
+.tap-emoji {
+  font-size: calc(var(--size) * 2.3);
+  line-height: 1;
+}
+
 .tap-confetti {
   width: var(--size);
   height: calc(var(--size) * 0.62);

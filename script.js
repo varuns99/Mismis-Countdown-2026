@@ -88,14 +88,22 @@ function fireworkAt(x, y) {
   const heartShapes = ["♡", "♥", "❣", "❥"];
   const colors = ["#d93f61", "#ee8faa", "#b84b68", "#f2a3b9", "#f4b740", "#78b8a0"];
   const fragment = document.createDocumentFragment();
+  const isComplete = elements.countdown.classList.contains("is-complete");
+  const particleCount = isComplete ? 26 : 20;
 
-  for (let index = 0; index < 26; index += 1) {
-    const angle = (Math.PI * 2 * index) / 26 + (Math.random() - 0.5) * 0.22;
+  for (let index = 0; index < particleCount; index += 1) {
+    const angle = (Math.PI * 2 * index) / particleCount + (Math.random() - 0.5) * 0.22;
     const distance = 42 + Math.random() * 86;
     const particle = document.createElement("span");
-    const isHeart = index % 5 === 0;
+    const isEmoji = index % (isComplete ? 8 : 6) === 0;
+    const isHeart = !isEmoji && (!isComplete || index % 3 === 0);
 
-    particle.className = isHeart ? "tap-particle tap-heart" : "tap-particle tap-confetti";
+    particle.className = isEmoji
+      ? "tap-particle tap-emoji"
+      : isHeart
+        ? "tap-particle tap-heart"
+        : "tap-particle tap-confetti";
+    if (isEmoji) particle.textContent = isComplete ? "🥹" : "🥺";
     if (isHeart) particle.textContent = heartShapes[index % heartShapes.length];
     particle.style.setProperty("--origin-x", `${x}px`);
     particle.style.setProperty("--origin-y", `${y}px`);
