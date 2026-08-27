@@ -506,6 +506,10 @@ h1 {
   object-fit: contain;
 }
 
+.milestone-art-mirrored {
+  transform: scaleX(-1);
+}
+
 .milestone:not(.milestone-start) > .milestone-icon > .milestone-art:not(.milestone-art-arrival) {
   width: 60px;
   height: 48px;
