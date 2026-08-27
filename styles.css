@@ -32,8 +32,14 @@ body {
 }
 
 .countdown {
+  position: relative;
   width: min(100%, 780px);
   text-align: center;
+}
+
+.countdown > :not(.sticker) {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -52,23 +58,34 @@ h1 {
   letter-spacing: 0;
 }
 
-.artwork {
-  width: min(100%, 360px);
-  height: 112px;
-  margin: 20px auto -4px;
-  overflow: hidden;
-  border: 1px solid rgba(217, 63, 97, 0.14);
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 14px 34px rgba(95, 54, 65, 0.08);
+.sticker {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
 }
 
-.artwork img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 46%;
+.sticker-cuddle {
+  top: 22px;
+  left: -112px;
+  width: 108px;
+  transform: rotate(-7deg);
+}
+
+.sticker-cheese {
+  top: 174px;
+  right: -136px;
+  width: 118px;
+  transform: rotate(6deg);
+}
+
+.sticker-ride {
+  right: -124px;
+  bottom: -26px;
+  width: 116px;
+  transform: rotate(5deg);
 }
 
 .timer {
@@ -115,29 +132,19 @@ h1 {
 
 .journey {
   width: min(100%, 720px);
-  margin: 8px auto 0;
-  padding-top: 20px;
-}
-
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-  color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 650;
+  margin: 4px auto 0;
+  padding-top: 14px;
 }
 
 .progress-track {
   position: relative;
-  height: 92px;
+  height: 68px;
 }
 
 .progress-track::before,
 .progress-fill {
   position: absolute;
-  top: 32px;
+  top: 31px;
   left: 0;
   height: 10px;
   border-radius: 999px;
@@ -158,7 +165,7 @@ h1 {
 
 .progress-needle {
   position: absolute;
-  top: 14px;
+  top: 8px;
   left: clamp(28px, var(--progress, 0%), calc(100% - 28px));
   z-index: 2;
   display: grid;
@@ -177,12 +184,11 @@ h1 {
 
 .milestone {
   position: absolute;
-  top: 0;
+  top: 8px;
   left: var(--position);
   display: grid;
   justify-items: center;
-  gap: 30px;
-  width: 80px;
+  width: 68px;
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 650;
@@ -203,7 +209,8 @@ h1 {
 
 .milestone::before {
   position: absolute;
-  top: 28px;
+  top: 20px;
+  left: 50%;
   width: 18px;
   height: 18px;
   border: 3px solid #fff;
@@ -211,6 +218,7 @@ h1 {
   background: var(--track);
   box-shadow: 0 0 0 1px rgba(217, 63, 97, 0.2);
   content: "";
+  transform: translateX(-50%);
 }
 
 .milestone.is-passed::before {
@@ -222,11 +230,6 @@ h1 {
   line-height: 1;
 }
 
-.milestone-time {
-  min-height: 2.2em;
-  line-height: 1.1;
-}
-
 @media (max-width: 620px) {
   body {
     place-items: start center;
@@ -236,10 +239,19 @@ h1 {
     padding-top: 4px;
   }
 
-  .artwork {
-    width: min(100%, 300px);
-    height: 92px;
-    margin-top: 16px;
+  .sticker-cuddle {
+    position: relative;
+    z-index: 0;
+    top: auto;
+    left: auto;
+    width: 84px;
+    margin: 8px auto -6px;
+    transform: rotate(-5deg);
+  }
+
+  .sticker-cheese,
+  .sticker-ride {
+    display: none;
   }
 
   .timer {
@@ -249,12 +261,11 @@ h1 {
   }
 
   .progress-track {
-    height: 118px;
+    height: 70px;
   }
 
   .milestone {
-    width: 64px;
-    font-size: 0.62rem;
+    width: 58px;
   }
 
   .milestone-icon {
