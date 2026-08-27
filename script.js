@@ -1,4 +1,12 @@
 const targetTime = new Date("2026-08-30T14:30:00+02:00").getTime();
+const progressStartTime = new Date("2026-08-27T10:49:45+02:00").getTime();
+const milestones = [
+  { time: progressStartTime, icon: "🐭🇭🇷" },
+  { time: new Date("2026-08-29T08:30:00+02:00").getTime(), icon: "🐭🧳" },
+  { time: new Date("2026-08-30T08:30:00+02:00").getTime(), icon: "🐭✈" },
+  { time: new Date("2026-08-30T12:30:00+02:00").getTime(), icon: "🚌🐭" },
+  { time: targetTime, icon: "🐭❤️🐭" },
+];
 
 const elements = {
   days: document.querySelector("#days"),
@@ -6,6 +14,10 @@ const elements = {
   minutes: document.querySelector("#minutes"),
   seconds: document.querySelector("#seconds"),
   status: document.querySelector("#status"),
+  progressFill: document.querySelector("#progress-fill"),
+  progressNeedle: document.querySelector("#progress-needle"),
+  progressTrack: document.querySelector(".progress-track"),
+  milestoneDots: document.querySelectorAll(".milestone"),
 };
 
 const units = {
@@ -20,7 +32,33 @@ function twoDigits(value) {
 }
 
 function updateCountdown() {
-  const remaining = targetTime - Date.now();
+  const now = Date.now();
+  const remaining = targetTime - now;
+  const progress = Math.min(
+    100,
+    Math.max(0, ((now - progressStartTime) / (targetTime - progressStartTime)) * 100),
+  );
+  const currentMilestone = milestones.reduce(
+    (current, milestone) => (now >= milestone.time ? milestone : current),
+    milestones[0],
+  );
+
+  elements.progressTrack.style.setProperty("--progress", `${progress}%`);
+  elements.progressFill.style.setProperty("--progress", `${progress}%`);
+  elements.progressNeedle.style.setProperty("--progress", `${progress}%`);
+  elements.progressNeedle.textContent = currentMilestone.icon;
+  elements.milestoneDots.forEach((dot, index) => {
+    const milestoneProgress = Math.min(
+      100,
+      Math.max(
+        0,
+        ((milestones[index].time - progressStartTime) / (targetTime - progressStartTime)) * 100,
+      ),
+    );
+
+    dot.style.setProperty("--position", `${milestoneProgress}%`);
+    dot.classList.toggle("is-passed", now >= milestones[index].time);
+  });
 
   if (remaining <= 0) {
     elements.days.textContent = "0";
