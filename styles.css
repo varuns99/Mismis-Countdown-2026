@@ -579,6 +579,10 @@ h1 {
   height: 55px;
 }
 
+.progress-needle[data-milestone="bus"] .pointer-animation {
+  transform: scaleX(-1);
+}
+
 .milestone {
   position: absolute;
   top: 8px;
