@@ -365,8 +365,11 @@ h1 {
 
 .status {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  min-height: 112px;
+  gap: 7px;
+  min-height: 142px;
   margin: 22px 0 0;
   color: var(--accent);
 }
@@ -375,6 +378,28 @@ h1 {
   width: clamp(94px, 16vw, 126px);
   height: auto;
   object-fit: contain;
+}
+
+.journey-status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+  max-width: min(100%, 320px);
+  padding: 5px 9px;
+  border: 1px solid rgba(217, 63, 97, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 6px 15px rgba(95, 54, 65, 0.06);
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 650;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.journey-status-value {
+  color: var(--accent);
 }
 
 .countdown.is-complete h1 {
@@ -642,12 +667,17 @@ h1 {
   }
 
   .status {
-    min-height: 98px;
+    min-height: 128px;
     margin-top: 18px;
   }
 
   .status-animation {
     width: 102px;
+  }
+
+  .journey-status {
+    max-width: min(100%, 270px);
+    font-size: 0.67rem;
   }
 
   .countdown.is-complete .status {

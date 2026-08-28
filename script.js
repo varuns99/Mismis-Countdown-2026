@@ -17,6 +17,7 @@ const elements = {
   minutes: document.querySelector("#minutes"),
   seconds: document.querySelector("#seconds"),
   status: document.querySelector("#status"),
+  statusValue: document.querySelector("#status-value"),
   progressFill: document.querySelector("#progress-fill"),
   progressNeedle: document.querySelector("#progress-needle"),
   progressTrack: document.querySelector(".progress-track"),
@@ -105,6 +106,18 @@ function updateProgressNeedle(milestone) {
   animation.src = milestone.pointerAsset;
   animation.alt = "";
   elements.progressNeedle.append(animation);
+}
+
+function updateJourneyStatus(milestone) {
+  const labels = {
+    run: "Zagrebmiš 🇭🇷",
+    pack: "Packmiš 🧳",
+    plane: "Planemiš ✈",
+    bus: "Busmiš 🚌",
+    arrival: "Mišmiš 💕",
+  };
+
+  elements.statusValue.textContent = labels[milestone.id];
 }
 
 function startHeartRain() {
@@ -235,6 +248,7 @@ function updateCountdown() {
   elements.progressFill.style.setProperty("--progress", `${progress}%`);
   elements.progressNeedle.style.setProperty("--progress", `${progress}%`);
   updateProgressNeedle(currentMilestone);
+  updateJourneyStatus(currentMilestone);
   elements.milestoneDots.forEach((dot, index) => {
     dot.classList.toggle("is-passed", now >= milestones[index].time);
   });
