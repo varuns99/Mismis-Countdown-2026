@@ -598,6 +598,7 @@ h1 {
 .milestone-art-arrival.milestone-art-run {
   width: 77px;
   height: 65px;
+  transform: translateX(8px);
 }
 
 .milestone-art-arrival + .milestone-art-arrival {
@@ -607,6 +608,10 @@ h1 {
 .milestone-art-wait {
   width: 66px;
   height: 55px;
+}
+
+.milestone-art-arrival.milestone-art-wait {
+  transform: translateY(-6px);
 }
 
 .milestone-icon-arrival:has(.milestone-art-run) {
@@ -783,6 +788,7 @@ h1 {
   .milestone-art-arrival.milestone-art-run {
     width: 53px;
     height: 53px;
+    transform: translateX(6px);
   }
 
   .milestone-art-arrival + .milestone-art-arrival {
@@ -792,6 +798,10 @@ h1 {
   .milestone-art-wait {
     width: 45px;
     height: 45px;
+  }
+
+  .milestone-art-arrival.milestone-art-wait {
+    transform: translateY(-4px);
   }
 
   .milestone-icon-arrival:has(.milestone-art-run) {
