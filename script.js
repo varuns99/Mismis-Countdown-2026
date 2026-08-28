@@ -287,7 +287,19 @@ function completeCountdown() {
   if (elements.countdown.classList.contains("is-complete")) return;
 
   elements.countdown.classList.add("is-complete");
-  elements.title.textContent = "Miš meets Miš now ❤️";
+  elements.title.replaceChildren();
+  const completeTitleGroup = document.createElement("span");
+  completeTitleGroup.className = "handwritten-title-complete-group";
+  const completeTitle = document.createElement("img");
+  completeTitle.className = "handwritten-title handwritten-title-complete";
+  completeTitle.src = "assets/mismis-title-complete-words.png?v=2";
+  completeTitle.alt = "Miš meets Miš now";
+  const completeHeart = document.createElement("img");
+  completeHeart.className = "handwritten-title-heart";
+  completeHeart.src = "assets/mismis-title-heart.png?v=1";
+  completeHeart.alt = "❤️";
+  completeTitleGroup.append(completeTitle, completeHeart);
+  elements.title.append(completeTitleGroup);
   elements.timer.replaceWith(elements.status);
   startHeartRain();
 }

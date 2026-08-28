@@ -329,6 +329,26 @@ h1 {
   margin: 0 auto;
 }
 
+.handwritten-title-complete-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, 1vw, 10px);
+  max-width: 100%;
+}
+
+.handwritten-title-complete {
+  width: min(75vw, 525px);
+  max-width: calc(100% - clamp(42px, 9vw, 66px));
+  margin: 0;
+}
+
+.handwritten-title-heart {
+  width: clamp(54px, 10.4vw, 86px);
+  height: auto;
+  flex: 0 0 auto;
+}
+
 .timer {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
