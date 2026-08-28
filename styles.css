@@ -402,6 +402,16 @@ h1 {
   color: var(--accent);
 }
 
+.journey-status-dot {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  margin-top: 0.1em;
+  border-radius: 50%;
+  background: #48a66f;
+  box-shadow: 0 0 0 2px rgba(72, 166, 111, 0.12), 0 0 8px rgba(72, 166, 111, 0.42);
+}
+
 .countdown.is-complete h1 {
   color: var(--accent);
 }
