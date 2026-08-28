@@ -36,6 +36,7 @@ const units = {
 };
 
 let musicPausedByUser = false;
+let lastTimerSparkle = 0;
 
 function updateMusicToggle() {
   const isPlaying = !elements.backgroundMusic.paused;
@@ -71,6 +72,62 @@ elements.musicToggle.addEventListener("click", toggleMusic);
 
 function twoDigits(value) {
   return String(value).padStart(2, "0");
+}
+
+const drawnDigitOffsets = {
+  0: "0.01em",
+  1: "-0.01em",
+  2: "0.02em",
+  3: "0em",
+  4: "0.015em",
+  5: "-0.01em",
+  6: "0.01em",
+  7: "0.025em",
+  8: "0em",
+  9: "0.015em",
+};
+
+function renderDrawnDigits(element, value) {
+  element.replaceChildren();
+  element.classList.add("drawn-time");
+
+  for (const digit of String(value)) {
+    const glyph = document.createElement("img");
+    glyph.className = "drawn-digit";
+    glyph.src = `assets/digits/${digit}.png?v=rose2`;
+    glyph.alt = digit;
+    glyph.style.setProperty("--baseline-offset", drawnDigitOffsets[digit]);
+    element.append(glyph);
+  }
+}
+
+function pulseTimer() {
+  if (!elements.timer.isConnected) return;
+
+  elements.timer.classList.remove("timer-heartbeat");
+  requestAnimationFrame(() => elements.timer.classList.add("timer-heartbeat"));
+}
+
+function releaseTimerSparkles(now) {
+  if (now - lastTimerSparkle < 3600) return;
+  lastTimerSparkle = now;
+
+  const secondsBox = elements.seconds.getBoundingClientRect();
+  const sparkles = ["·", "♡", "•", "♥"];
+  const count = 1 + Math.floor(Math.random() * 2);
+
+  for (let index = 0; index < count; index += 1) {
+    const sparkle = document.createElement("span");
+    sparkle.className = "timer-sparkle";
+    sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+    sparkle.style.left = `${secondsBox.left + secondsBox.width * (0.34 + Math.random() * 0.32)}px`;
+    sparkle.style.top = `${secondsBox.top + secondsBox.height * (0.16 + Math.random() * 0.2)}px`;
+    sparkle.style.fontSize = `${10 + Math.random() * 7}px`;
+    sparkle.style.setProperty("--drift", `${-13 + Math.random() * 26}px`);
+    sparkle.style.setProperty("--tilt", `${-18 + Math.random() * 36}deg`);
+    sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
+    document.body.append(sparkle);
+  }
 }
 
 function journeyProgress(now) {
@@ -263,10 +320,12 @@ function updateCountdown() {
   const minutes = Math.floor((remaining % units.hour) / units.minute);
   const seconds = Math.floor((remaining % units.minute) / units.second);
 
-  elements.days.textContent = String(days);
-  elements.hours.textContent = twoDigits(hours);
-  elements.minutes.textContent = twoDigits(minutes);
-  elements.seconds.textContent = twoDigits(seconds);
+  renderDrawnDigits(elements.days, String(days));
+  renderDrawnDigits(elements.hours, twoDigits(hours));
+  renderDrawnDigits(elements.minutes, twoDigits(minutes));
+  renderDrawnDigits(elements.seconds, twoDigits(seconds));
+  pulseTimer();
+  releaseTimerSparkles(now);
 }
 
 updateCountdown();

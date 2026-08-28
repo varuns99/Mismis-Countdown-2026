@@ -322,6 +322,13 @@ h1 {
   letter-spacing: 0;
 }
 
+.handwritten-title {
+  display: block;
+  width: min(60%, 420px);
+  height: auto;
+  margin: 0 auto;
+}
+
 .timer {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -333,6 +340,41 @@ h1 {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.66);
   box-shadow: 0 18px 38px rgba(95, 54, 65, 0.07);
+}
+
+.timer.timer-heartbeat {
+  animation: timer-heartbeat 420ms cubic-bezier(0.2, 0.8, 0.32, 1);
+}
+
+@keyframes timer-heartbeat {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.timer-sparkle {
+  position: fixed;
+  z-index: 4;
+  color: var(--accent);
+  font-family: cursive;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  animation: timer-sparkle 1.7s ease-out forwards;
+}
+
+@keyframes timer-sparkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 6px) rotate(var(--tilt)) scale(0.7);
+  }
+  16% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift)), -28px) rotate(calc(var(--tilt) + 16deg)) scale(1.05);
+  }
 }
 
 .time-part {
@@ -354,6 +396,22 @@ h1 {
   font-weight: 800;
   line-height: 1;
   font-variant-numeric: tabular-nums;
+}
+
+.time-value.drawn-time {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 1em;
+  gap: 0.02em;
+}
+
+.drawn-digit {
+  display: block;
+  width: auto;
+  height: 0.94em;
+  object-fit: contain;
+  transform: translateY(var(--baseline-offset));
 }
 
 .time-label {
