@@ -611,7 +611,7 @@ h1 {
 }
 
 .milestone-art-arrival.milestone-art-wait {
-  transform: translateY(-6px);
+  transform: translateY(-3px);
 }
 
 .milestone-icon-arrival:has(.milestone-art-run) {
@@ -801,7 +801,7 @@ h1 {
   }
 
   .milestone-art-arrival.milestone-art-wait {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 
   .milestone-icon-arrival:has(.milestone-art-run) {
