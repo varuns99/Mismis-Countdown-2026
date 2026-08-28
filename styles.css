@@ -496,6 +496,11 @@ h1 {
   height: 60px;
 }
 
+.progress-needle[data-milestone="plane"] {
+  width: 70px;
+  height: 55px;
+}
+
 .milestone {
   position: absolute;
   top: 8px;
@@ -567,6 +572,11 @@ h1 {
 .milestone:not(.milestone-start) > .milestone-icon > .milestone-art:not(.milestone-art-arrival) {
   width: 60px;
   height: 48px;
+}
+
+.milestone-art-plane {
+  width: 72px !important;
+  height: 58px !important;
 }
 
 .milestone-icon-arrival {
@@ -733,6 +743,16 @@ h1 {
   .milestone:not(.milestone-start) > .milestone-icon > .milestone-art:not(.milestone-art-arrival) {
     width: 52px;
     height: 44px;
+  }
+
+  .progress-needle[data-milestone="plane"] {
+    width: 65px;
+    height: 52px;
+  }
+
+  .milestone-art-plane {
+    width: 62px !important;
+    height: 53px !important;
   }
 
   .milestone-icon-arrival {
